@@ -96,10 +96,14 @@ class YoloNet(Net):
         :return: 3-D tensor[CELL_SIZE,CELL_SIZE,BOXES_PER_CELL]
         """
         #transfer to topleft(x,y) & bottomright(x,y)
-        tf.stack(
+        boxes1=tf.stack(
           [boxes1[:,:,:,0]-boxes1[:,:,:,2]/2,boxes1[:,:,:,1]-boxes1[:,:,:,3]/2,
-           boxes1[:,:,:,0]+boxes1[:,:,:,2]/2,boxes1[:,:,:,1]-boxes1[:,:,:,3]/2]
+           boxes1[:,:,:,0]+boxes1[:,:,:,2]/2,boxes1[:,:,:,1]+boxes1[:,:,:,3]/2]
         )
+        boxes1=tf.transpose(boxes1,[1,2,3,0])  #y_top,y_bottom,x_bottom,x_top
+        #x,y,x,y
+        boxes2=tf.stack([boxes2[0]-boxes2[2]/2,boxes2[1]-boxes2[3]/2,boxes2[0]+boxes2[2]/2,boxes2[1]+boxes2[3]/2])
+
 
 
     def loss(self,predicts,labels,objects_num):
