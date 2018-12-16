@@ -104,8 +104,6 @@ class YoloNet(Net):
         #x,y,x,y
         boxes2=tf.stack([boxes2[0]-boxes2[2]/2,boxes2[1]-boxes2[3]/2,boxes2[0]+boxes2[2]/2,boxes2[1]+boxes2[3]/2])
 
-
-
     def loss(self,predicts,labels,objects_num):
         pass
 
